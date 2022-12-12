@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Interior| Admin</title>
+    <title>Chisel & Wood | Vendor</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -47,11 +47,11 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-2 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="{{route('admin.home')}}" class="navbar-brand mx-4 mb-3">
+                <a href="{{route('vendor.home')}}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>INTERIOR</h3>
                 </a>
                 <div class="navbar-nav w-100">
-                    <a href="{{route('admin.home')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{route('vendor.home')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-folder"></i>Master Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -182,13 +182,17 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="{{ asset('admin/img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                            @php
+                            $avater = asset('avater.png')   
+                            // $image = Auth::guard('vendor')->user()->name;
+                            // dd($image);
+                            @endphp
+                            <img class="rounded-circle me-lg-2" src="{{Auth::guard('vendor')->user()->image ? asset(Auth::guard('vendor')->user()->image) : $avater}}" alt="" style="width: 40px; height: 40px;">
                             
-                            <span class="d-none d-lg-inline-flex">{{ Auth::guard('admin')->user()->name }}</span>
+                            <span class="d-none d-lg-inline-flex">{{ Auth::guard('vendor')->user()->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="{{ route('vendor.profile') }}" class="dropdown-item">My Profile</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

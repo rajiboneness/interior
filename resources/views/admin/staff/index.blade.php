@@ -12,16 +12,15 @@
         <div class="row g-4">
             <div class="col-12 col-md-8">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Vendor List</h6>
+                    <h6 class="mb-4">Staff List</h6>
                     <div class="table-responsive">
                         <table class="table" id="vendorTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Head Name</th>
                                     <th scope="col">Mobile</th>
-                                    {{-- <th scope="col">Address</th> --}}
+                                    <th scope="col">Address</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Joined</th>
                                 </tr>
@@ -34,14 +33,13 @@
                                             <td>{{ $key+1 }}</td>
                                             <td><p style="overflow: hidden;text-overflow: ellipsis;margin-bottom: 0;">{{ $value->name }}</p>
                                                 <div class="row__action">
-                                                    <a href="{{ route('admin.vendor.view', $value->id) }}">View </a><span>|</span>
-                                                    <a href="{{ route('admin.vendor.delete', $value->id) }}" class="text-danger"> delete</a>
+                                                    <a href="{{ route('admin.staff.view', $value->id) }}">View </a><span>|</span>
+                                                    <a href="{{ route('admin.staff.delete', $value->id) }}" class="text-danger"> delete</a>
                                                 </div>
                                             </td>
-                                            <td>{{ $value->vendor_head }}</td>
                                             <td>{{ $value->phone }}</td>
-                                            {{-- <td>{{ $value->address }}</td> --}}
-                                            <td> <a href="{{ route('admin.vendor.status', $value->id) }}" class="badge {{ $value->status==1 ? "success-btn" : "danger-btn"}}">{{ $value->status== 1 ?"Active" : "Inactive" }}</a></td>
+                                            <td>{{ $value->address }}</td>
+                                            <td> <a href="{{ route('admin.staff.status', $value->id) }}" class="badge {{ $value->status==1 ? "success-btn" : "danger-btn"}}">{{ $value->status== 1 ?"Active" : "Inactive" }}</a></td>
                                             <td>
                                                 {{date('d M Y', strtotime($value->created_at))}}
                                             </td>
@@ -56,19 +54,13 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <form method="POST" action="{{ asset(route('admin.vendor.store')) }}">
+                <form method="POST" action="{{ asset(route('admin.staff.store')) }}">
                     @csrf
-                   
                     <div class="bg-light rounded h-100 p-4">
                         <div class="mb-3">
                             <label for="" class="form-label">Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                             @error('name') <p class="small text-danger">{{ $message }}</p> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Vendod Head<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="hname" name="hname" value="{{old('hname')}}">
-                            @error('hname') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Email<span class="text-danger">*</span></label>
@@ -87,7 +79,7 @@
                             @error('address') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">State</label>
+                            <label for="" class="form-label">State<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="state" name="state" value="{{old('state')}}">
                             @error('state') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
@@ -102,12 +94,12 @@
                         </div>
                         {{-- <div class="row p-2">
                             <div class="col-md-12 card">
-                                <div class="card-header p-0 mb-3">Image* <span class="text-danger">*</span></div>
+                                <div class="card-header p-0 mb-3">Image <span class="text-danger">*</span></div>
                                 <div class="card-body p-0">
                                     <div class="w-100 product__thumb">
                                         <label for="thumbnail"><img id="output" src="{{ asset('admin/img/placeholder-image.jpg') }}" /></label>
                                     </div>
-                                    <input type="file" name="image_path" id="thumbnail" accept="image/*" onchange="loadFile(event)" class="d-none">
+                                    <input type="file" name="image" id="thumbnail" accept="image/*" onchange="loadFile(event)" class="d-none">
                                     <script>
                                         var loadFile = function(event) {
                                             var output = document.getElementById('output');
@@ -118,12 +110,12 @@
                                         };
                                     </script>
                                 </div>
-                                @error('image_path') <p class="small text-danger">{{ $message }}</p> @enderror
+                                @error('image') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div> --}}
                     </div>
-                    <div class="bg-light text-end pt-4 px-4">
-                        <button type="submit" class="btn btn-sm btn btn-primary">Add Vendor</button>
+                    <div class="bg-light pt-4 px-4">
+                        <button type="submit" class="btn btn-sm btn btn-primary">Add Staff</button>
                     </div>
                 </form>
             </div>

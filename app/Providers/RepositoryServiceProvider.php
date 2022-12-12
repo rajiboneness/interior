@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Interfaces\VendorInterface;
+use App\Interfaces\StaffInterface;
 
 
 use App\Repositories\VendorRepository;
+use App\Repositories\StaffRepository;
 
 
 
@@ -21,6 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(VendorInterface::class, VendorRepository::class);
+        $this->app->bind(StaffInterface::class, StaffRepository::class);
         
     }
 
